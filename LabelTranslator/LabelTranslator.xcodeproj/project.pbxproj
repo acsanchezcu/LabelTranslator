@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+        64E9ADE81F2A2436007BAC6F /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 64E9ADE71F2A2436007BAC6F /* tessdata */; };
 		08E91A951F41EC5000391C3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E91A941F41EC5000391C3E /* AppDelegate.swift */; };
 		08E91A971F41EC5000391C3E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E91A961F41EC5000391C3E /* ViewController.swift */; };
 		08E91A9A1F41EC5000391C3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08E91A981F41EC5000391C3E /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+        64E9ADE71F2A2436007BAC6F /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		08E91A911F41EC5000391C3E /* LabelTranslator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LabelTranslator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08E91A941F41EC5000391C3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08E91A961F41EC5000391C3E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 		08E91A931F41EC5000391C3E /* LabelTranslator */ = {
 			isa = PBXGroup;
 			children = (
+                64E9ADE71F2A2436007BAC6F /* tessdata */,
 				08E91A941F41EC5000391C3E /* AppDelegate.swift */,
 				08E91A961F41EC5000391C3E /* ViewController.swift */,
 				08E91A981F41EC5000391C3E /* Main.storyboard */,
@@ -149,6 +152,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+                64E9ADE81F2A2436007BAC6F /* tessdata in Resources */,
 				08E91A9F1F41EC5000391C3E /* LaunchScreen.storyboard in Resources */,
 				08E91A9C1F41EC5000391C3E /* Assets.xcassets in Resources */,
 				08E91A9A1F41EC5000391C3E /* Main.storyboard in Resources */,
