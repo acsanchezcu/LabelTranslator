@@ -12,6 +12,7 @@
 		08E91A9A1F41EC5000391C3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08E91A981F41EC5000391C3E /* Main.storyboard */; };
 		08E91A9C1F41EC5000391C3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08E91A9B1F41EC5000391C3E /* Assets.xcassets */; };
 		08E91A9F1F41EC5000391C3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08E91A9D1F41EC5000391C3E /* LaunchScreen.storyboard */; };
+		7F69DD9E45896A845460E0B1 /* Pods_LabelTranslator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8176DA22A559D06E7BF0F1A6 /* Pods_LabelTranslator.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		08E91A9B1F41EC5000391C3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08E91A9E1F41EC5000391C3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08E91AA01F41EC5000391C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A9ECA21D17A4A3E4EA4C67B /* Pods-LabelTranslator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabelTranslator.release.xcconfig"; path = "Pods/Target Support Files/Pods-LabelTranslator/Pods-LabelTranslator.release.xcconfig"; sourceTree = "<group>"; };
+		54BF457D3407819506AC8E01 /* Pods-LabelTranslator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LabelTranslator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LabelTranslator/Pods-LabelTranslator.debug.xcconfig"; sourceTree = "<group>"; };
+		8176DA22A559D06E7BF0F1A6 /* Pods_LabelTranslator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LabelTranslator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F69DD9E45896A845460E0B1 /* Pods_LabelTranslator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				08E91A931F41EC5000391C3E /* LabelTranslator */,
 				08E91A921F41EC5000391C3E /* Products */,
+				692D4A8AC751B5D3AFEE1EDF /* Pods */,
+				2B013CE6A565CC0658CFB7A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = LabelTranslator;
 			sourceTree = "<group>";
 		};
+		2B013CE6A565CC0658CFB7A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8176DA22A559D06E7BF0F1A6 /* Pods_LabelTranslator.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		692D4A8AC751B5D3AFEE1EDF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				54BF457D3407819506AC8E01 /* Pods-LabelTranslator.debug.xcconfig */,
+				3A9ECA21D17A4A3E4EA4C67B /* Pods-LabelTranslator.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08E91AA31F41EC5000391C3E /* Build configuration list for PBXNativeTarget "LabelTranslator" */;
 			buildPhases = (
+				814DAFEE19AC20D58C80E3FD /* [CP] Check Pods Manifest.lock */,
 				08E91A8D1F41EC5000391C3E /* Sources */,
 				08E91A8E1F41EC5000391C3E /* Frameworks */,
 				08E91A8F1F41EC5000391C3E /* Resources */,
+				076D3587DFB1EEA2AEE475D7 /* [CP] Embed Pods Frameworks */,
+				8D4860C4FA25C5DDDB0EF466 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		076D3587DFB1EEA2AEE475D7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LabelTranslator/Pods-LabelTranslator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		814DAFEE19AC20D58C80E3FD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8D4860C4FA25C5DDDB0EF466 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LabelTranslator/Pods-LabelTranslator-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		08E91A8D1F41EC5000391C3E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -182,6 +257,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -237,6 +314,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -267,6 +346,7 @@
 		};
 		08E91AA41F41EC5000391C3E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54BF457D3407819506AC8E01 /* Pods-LabelTranslator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A8GM57A6DQ;
@@ -281,6 +361,7 @@
 		};
 		08E91AA51F41EC5000391C3E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A9ECA21D17A4A3E4EA4C67B /* Pods-LabelTranslator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = A8GM57A6DQ;
@@ -312,6 +393,7 @@
 				08E91AA51F41EC5000391C3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
