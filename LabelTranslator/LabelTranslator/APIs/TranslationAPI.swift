@@ -62,7 +62,7 @@ class TranslationAPI
         
         guard let url = URL(string: urlString) else { return }
         
-        let params = ["q" : text, "target" : Settings.shared.getUserLanguage()]
+        let params = ["q" : text, "target" : language]
         
         var request = URLRequest(url: url)
         

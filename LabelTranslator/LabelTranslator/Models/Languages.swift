@@ -6,7 +6,7 @@
 //  Copyright © 2017 Sanchez Custodio, Abel. All rights reserved.
 //
 
-struct Language: Decodable {
+struct Language: Encodable,Decodable {
     let language: String
     let name: String?
 }

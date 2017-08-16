@@ -37,10 +37,18 @@ class VisionAPI
             imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: 6, options: [:])
         }
         
-        guard let handler = imageRequestHandler else { return }
+        guard let handler = imageRequestHandler else {
+            if let completionHandler = completionHandler {
+                completionHandler([])
+            }
+            return
+        }
         
         let request = VNDetectTextRectanglesRequest { [weak self] (request, error) in
             if error != nil {
+                if let completionHandler = completionHandler {
+                    completionHandler([])
+                }
                 return
             }
             

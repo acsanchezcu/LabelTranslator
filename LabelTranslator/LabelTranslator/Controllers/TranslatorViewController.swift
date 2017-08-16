@@ -14,6 +14,7 @@ class TranslatorViewController: UIViewController
 {    
     // MARK: - Outlets
     
+    @IBOutlet weak var languageButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
@@ -57,7 +58,7 @@ class TranslatorViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         adjustSessionVideo()
         addTapRecognizerForCameraView()
     }
@@ -66,6 +67,12 @@ class TranslatorViewController: UIViewController
         super.viewWillAppear(animated)
         
         session.startRunning()
+        
+        let language = Settings.shared.getLanguage()
+        
+        let attributedTitle = NSAttributedString(string: language.name ?? language.language,
+                                                 attributes: [NSAttributedStringKey.foregroundColor : UIColor(red:1.00, green:0.00, blue:0.00, alpha:1.0),NSAttributedStringKey.underlineStyle : 1])
+        languageButton.setAttributedTitle(attributedTitle, for: .normal)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,7 +98,11 @@ class TranslatorViewController: UIViewController
     // MARK: - Private Methods
     
     private func detectAndTranslateText() {
-        imageView.image = UIImage.imageWithCVPixelBuffer(cvPixelBuffer)?.fixedOrientation()
+        guard let image = UIImage.imageWithCVPixelBuffer(cvPixelBuffer)?.fixedOrientation() else {
+            return
+        }
+        
+        imageView.image = image
         
         activityIndicator.startAnimating()
         
@@ -104,11 +115,25 @@ class TranslatorViewController: UIViewController
                 return
             }
             TesseractAPI.shared.recognize(images: images, completionHandler: { (text) in
-                print(text)
-                DispatchQueue.main.async {
-                    self?.activityIndicator.stopAnimating()
-                    self?.translationLabel?.text = text
+                if text.isEmpty {
+                    DispatchQueue.main.async {
+                        self?.activityIndicator.stopAnimating()
+                    }
+                    print("no text recognized")
+                    return
                 }
+                
+                TranslationAPI.shared.translateText(text, language: Settings.shared.getLanguage().language, completionHandler: { (translate, error) in
+                    DispatchQueue.main.async {
+                        self?.activityIndicator.stopAnimating()
+                    }
+                    
+                    guard let translateText = translate else { return }
+                    
+                    DispatchQueue.main.async {
+                        self?.translationLabel.text = translateText
+                    }
+                })
             })
         }
     }
@@ -125,7 +150,7 @@ class TranslatorViewController: UIViewController
     }
 }
 
-    // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
+// MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
 extension TranslatorViewController: AVCaptureVideoDataOutputSampleBufferDelegate
 {

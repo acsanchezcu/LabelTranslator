@@ -20,15 +20,22 @@ class Settings
     
     // MARK: - Public Methods
     
-    //'en' language by default
-    
-    func getUserLanguage() -> String {
-        guard let language = UserDefaults.standard.string(forKey: kUserLanguage) else { return "en" }
+    func getLanguage() -> Language {
+        let defaultLanguage = Language(language: "es", name: "Spanish")
+        let decoder = JSONDecoder()
+        
+        guard let data = UserDefaults.standard.object(forKey: kUserLanguage) as? Data,
+            let language = try? decoder.decode(Language.self, from: data) else {
+                return defaultLanguage }
         
         return language
     }
     
-    func saveUserLanguage(language: String) {
-        UserDefaults.standard.setValue(language, forKey: kUserLanguage)
+    func saveUserLanguage(language: Language) {
+        let encoder = JSONEncoder()
+        
+        if let enconded = try? encoder.encode(language) {
+            UserDefaults.standard.setValue(enconded, forKey: kUserLanguage)
+        }
     }
 }
