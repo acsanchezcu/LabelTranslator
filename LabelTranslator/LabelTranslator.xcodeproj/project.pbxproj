@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083042F71F44545700B0214A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083042F61F44545300B0214A /* Settings.swift */; };
+		083042F91F44546200B0214A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083042F81F44546200B0214A /* UIImage+Extension.swift */; };
 		08E91A951F41EC5000391C3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E91A941F41EC5000391C3E /* AppDelegate.swift */; };
 		08E91A9A1F41EC5000391C3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08E91A981F41EC5000391C3E /* Main.storyboard */; };
 		08E91A9C1F41EC5000391C3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08E91A9B1F41EC5000391C3E /* Assets.xcassets */; };
@@ -15,7 +17,6 @@
 		08E91AAC1F41F0CE00391C3E /* SynthesizerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E91AAB1F41F0CE00391C3E /* SynthesizerAPI.swift */; };
 		08E91AAE1F41F15400391C3E /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E91AAD1F41F15400391C3E /* Languages.swift */; };
 		08E91AB01F41F15C00391C3E /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E91AAF1F41F15C00391C3E /* Translate.swift */; };
-		08E91AB31F41F1B300391C3E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E91AB21F41F1B300391C3E /* Settings.swift */; };
 		08E91AB51F41F3A400391C3E /* ImageProcessorAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E91AB41F41F3A400391C3E /* ImageProcessorAPI.swift */; };
 		08E91AB71F41F44F00391C3E /* TesseractAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E91AB61F41F44F00391C3E /* TesseractAPI.swift */; };
 		08E91AB91F41F54600391C3E /* TranslatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E91AB81F41F54600391C3E /* TranslatorViewController.swift */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		083042F61F44545300B0214A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		083042F81F44546200B0214A /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		08E91A911F41EC5000391C3E /* LabelTranslator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LabelTranslator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08E91A941F41EC5000391C3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08E91A991F41EC5000391C3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,7 +38,6 @@
 		08E91AAB1F41F0CE00391C3E /* SynthesizerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynthesizerAPI.swift; sourceTree = "<group>"; };
 		08E91AAD1F41F15400391C3E /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		08E91AAF1F41F15C00391C3E /* Translate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translate.swift; sourceTree = "<group>"; };
-		08E91AB21F41F1B300391C3E /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		08E91AB41F41F3A400391C3E /* ImageProcessorAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessorAPI.swift; sourceTree = "<group>"; };
 		08E91AB61F41F44F00391C3E /* TesseractAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesseractAPI.swift; sourceTree = "<group>"; };
 		08E91AB81F41F54600391C3E /* TranslatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		083042F41F44545300B0214A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				083042F81F44546200B0214A /* UIImage+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		083042F51F44545300B0214A /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				083042F61F44545300B0214A /* Settings.swift */,
+			);
+			path = Singletons;
+			sourceTree = "<group>";
+		};
 		08E91A881F41EC5000391C3E = {
 			isa = PBXGroup;
 			children = (
@@ -125,7 +143,8 @@
 		08E91AB11F41F1AC00391C3E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				08E91AB21F41F1B300391C3E /* Settings.swift */,
+				083042F41F44545300B0214A /* Extension */,
+				083042F51F44545300B0214A /* Singletons */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -274,11 +293,12 @@
 				08E91AB71F41F44F00391C3E /* TesseractAPI.swift in Sources */,
 				08E91AAC1F41F0CE00391C3E /* SynthesizerAPI.swift in Sources */,
 				08E91AB01F41F15C00391C3E /* Translate.swift in Sources */,
+				083042F71F44545700B0214A /* Settings.swift in Sources */,
 				08E91AB91F41F54600391C3E /* TranslatorViewController.swift in Sources */,
 				08E91AAA1F41F0BB00391C3E /* TranslatorAPI.swift in Sources */,
-				08E91AB31F41F1B300391C3E /* Settings.swift in Sources */,
 				08E91AAE1F41F15400391C3E /* Languages.swift in Sources */,
 				08E91A951F41EC5000391C3E /* AppDelegate.swift in Sources */,
+				083042F91F44546200B0214A /* UIImage+Extension.swift in Sources */,
 				08E91AB51F41F3A400391C3E /* ImageProcessorAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

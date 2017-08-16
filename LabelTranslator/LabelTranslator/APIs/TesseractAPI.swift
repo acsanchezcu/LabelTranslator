@@ -24,7 +24,7 @@ class TesseractAPI: NSObject {
     
     func recognize(images: [UIImage], completionHandler: @escaping (String) -> ()) {
         if images.count == 0 || queue.operationCount > 0 {
-            print("NO IMAGES OR OPERATIONS IN PROCESS")
+            print("No images or operations are in progress")
             completionHandler("")
             return
         }
@@ -131,6 +131,7 @@ private class TesseractOperation: Operation {
                 return
             }
             
+            tesseract.charWhitelist = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.:"
             tesseract.charBlacklist = "‘'"
             tesseract.delegate = self
             

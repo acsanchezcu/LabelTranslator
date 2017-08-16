@@ -14,7 +14,18 @@ class TranslatorViewController: UIViewController
 {    
     // MARK: - Outlets
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
+        didSet {
+            activityIndicator.hidesWhenStopped = true
+        }
+    }
+    @IBOutlet weak var translationLabel: UILabel! {
+        didSet {
+            translationLabel.text = ""
+        }
+    }
     
     // MARK: - Properties
     
@@ -40,6 +51,7 @@ class TranslatorViewController: UIViewController
         
         return sessionLayer
     }()
+    var cvPixelBuffer: CVPixelBuffer?
     
     // MARK: - Lifecycle
     
@@ -47,6 +59,7 @@ class TranslatorViewController: UIViewController
         super.viewDidLoad()
 
         adjustSessionVideo()
+        addTapRecognizerForCameraView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,11 +82,46 @@ class TranslatorViewController: UIViewController
         cameraView.layer.sublayers?[0].frame = cameraView.bounds
     }
     
+    // MARK: - Actions
+    
+    @objc func cameraViewTapped() {
+        detectAndTranslateText()
+    }
+    
     // MARK: - Private Methods
+    
+    private func detectAndTranslateText() {
+        imageView.image = UIImage.imageWithCVPixelBuffer(cvPixelBuffer)?.fixedOrientation()
+        
+        activityIndicator.startAnimating()
+        
+        VisionAPI.shared.highlight(imageView: imageView) { [weak self] (images) in
+            if images.isEmpty {
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                }
+                print("no images founded")
+                return
+            }
+            TesseractAPI.shared.recognize(images: images, completionHandler: { (text) in
+                print(text)
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                    self?.translationLabel?.text = text
+                }
+            })
+        }
+    }
     
     private func adjustSessionVideo() {
         sessionLayer.frame = cameraView.bounds
         cameraView.layer.addSublayer(sessionLayer)
+    }
+    
+    private func addTapRecognizerForCameraView() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(TranslatorViewController.cameraViewTapped))
+        
+        cameraView?.addGestureRecognizer(tapRecognizer)
     }
 }
 
@@ -85,6 +133,8 @@ extension TranslatorViewController: AVCaptureVideoDataOutputSampleBufferDelegate
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
+        
+        cvPixelBuffer = pixelBuffer
         
         VisionAPI.shared.highlight(pixelBuffer: pixelBuffer, view: cameraView)
     }
