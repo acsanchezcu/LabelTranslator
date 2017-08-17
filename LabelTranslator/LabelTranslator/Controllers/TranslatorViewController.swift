@@ -14,7 +14,8 @@ class TranslatorViewController: UIViewController
 {    
     // MARK: - Outlets
     
-    @IBOutlet weak var languageButton: UIButton!
+    @IBOutlet weak var languageFromButton: UIButton!
+    @IBOutlet weak var languageToButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
@@ -53,6 +54,7 @@ class TranslatorViewController: UIViewController
         return sessionLayer
     }()
     var cvPixelBuffer: CVPixelBuffer?
+    var type: LanguageType = .from
     
     // MARK: - Lifecycle
     
@@ -68,11 +70,17 @@ class TranslatorViewController: UIViewController
         
         session.startRunning()
         
-        let language = Settings.shared.getLanguage()
+        let languageFrom = Settings.shared.getLanguage(type: .from)
+        let languageTo = Settings.shared.getLanguage(type: .to)
         
-        let attributedTitle = NSAttributedString(string: language.name ?? language.language,
-                                                 attributes: [NSAttributedStringKey.foregroundColor : UIColor(red:1.00, green:0.00, blue:0.00, alpha:1.0),NSAttributedStringKey.underlineStyle : 1])
-        languageButton.setAttributedTitle(attributedTitle, for: .normal)
+        let attributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey.foregroundColor : UIColor(red:1.00, green:0.00, blue:0.00, alpha:1.0),NSAttributedStringKey.underlineStyle : 1]
+        
+        let fromTitle = NSAttributedString(string: languageFrom.name ?? languageFrom.language,
+                                                 attributes: attributes)
+        let toTitle = NSAttributedString(string: languageTo.name ?? languageTo.language,
+                                           attributes: attributes)
+        languageFromButton.setAttributedTitle(fromTitle, for: .normal)
+        languageToButton.setAttributedTitle(toTitle, for: .normal)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -93,6 +101,23 @@ class TranslatorViewController: UIViewController
     
     @objc func cameraViewTapped() {
         detectAndTranslateText()
+    }
+    
+    @IBAction func languagesButtonTapped(_ sender: Any) {
+        guard let button = sender as? UIButton else { return }
+        
+        type = (button.isEqual(languageFromButton)) ? .from : .to
+        
+        performSegue(withIdentifier: "goToLanguages", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navigationController = segue.destination as? UINavigationController,
+            let viewController = navigationController.viewControllers.first as? LanguagesViewController else {
+                return
+        }
+        
+        viewController.type = type
     }
     
     // MARK: - Private Methods
@@ -123,9 +148,16 @@ class TranslatorViewController: UIViewController
                     return
                 }
                 
-                TranslationAPI.shared.translateText(text, language: Settings.shared.getLanguage().language, completionHandler: { (translate, error) in
+                TranslationAPI.shared.translateText(text, language: Settings.shared.getLanguage(type: .to).language, completionHandler: { (translate, error) in
                     DispatchQueue.main.async {
                         self?.activityIndicator.stopAnimating()
+                    }
+                    
+                    if let error = error {
+                        let alertController = UIAlertController.init(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        let okAction = UIAlertAction.init(title: "Ok", style: .default, handler: nil)
+                        alertController.addAction(okAction)
+                        self?.present(alertController, animated: true, completion: nil)
                     }
                     
                     guard let translateText = translate else { return }

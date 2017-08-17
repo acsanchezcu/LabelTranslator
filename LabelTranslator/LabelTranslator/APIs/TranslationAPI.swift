@@ -29,7 +29,7 @@ class TranslationAPI
         let urlString = "\(BASE_URL)/languages?key=\(API_KEY)"
         guard let url = URL(string: urlString) else { return }
         
-        let params = ["target": "en"]
+        let params = ["target": Settings.shared.getLanguage(type: .from).language]
         
         var request = URLRequest(url: url)
         

@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+enum LanguageType {
+    case from
+    case to
+}
+
 class LanguagesViewController: UIViewController {
     
     // MARK: - Outlets
@@ -24,12 +30,12 @@ class LanguagesViewController: UIViewController {
     }
     
     // MARK: - Properties
-    
+    var type: LanguageType = .from
     var languages: [Language] = [] {
         didSet {
             tableView?.reloadData()
             
-            let userLanguage = Settings.shared.getLanguage()
+            let userLanguage = Settings.shared.getLanguage(type: type)
             
             for (index, language) in languages.enumerated() {
                 if language.language == userLanguage.language {
@@ -44,9 +50,9 @@ class LanguagesViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         getLanguages()
     }
@@ -61,7 +67,7 @@ class LanguagesViewController: UIViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             let language = languages[indexPath.row]
             
-            Settings.shared.saveUserLanguage(language: language)
+            Settings.shared.saveUserLanguage(language: language, type: type)
         }
         
         navigationController?.dismiss(animated: true, completion: nil)

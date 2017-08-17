@@ -130,6 +130,9 @@ class VisionAPI
         
         guard let observations = request.results,
             observations.count > 0 else {
+                if let completionHandler = completionHandler {
+                    completionHandler([])
+                }
                 return
         }
         
