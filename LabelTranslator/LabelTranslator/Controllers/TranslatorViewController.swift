@@ -14,6 +14,7 @@ class TranslatorViewController: UIViewController
 {    
     // MARK: - Outlets
     
+    @IBOutlet weak var synthesizeButton: UIButton!
     @IBOutlet weak var languageFromButton: UIButton!
     @IBOutlet weak var languageToButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
@@ -23,11 +24,7 @@ class TranslatorViewController: UIViewController
             activityIndicator.hidesWhenStopped = true
         }
     }
-    @IBOutlet weak var translationLabel: UILabel! {
-        didSet {
-            translationLabel.text = ""
-        }
-    }
+    @IBOutlet weak var translationLabel: UILabel!
     
     // MARK: - Properties
     
@@ -55,6 +52,12 @@ class TranslatorViewController: UIViewController
     }()
     var cvPixelBuffer: CVPixelBuffer?
     var type: LanguageType = .from
+    var translatedText = "" {
+        willSet {
+            translationLabel.text = newValue
+            synthesizeButton.isEnabled = !newValue.isEmpty
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -63,6 +66,8 @@ class TranslatorViewController: UIViewController
         
         adjustSessionVideo()
         addTapRecognizerForCameraView()
+        
+        translatedText = ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +108,10 @@ class TranslatorViewController: UIViewController
         detectAndTranslateText()
     }
     
+    @IBAction func synthesizerButtonTapped(_ sender: Any) {
+        SynthesizerAPI.shared.synthesizer(translatedText, language: Settings.shared.getLanguage(type: .to).language)
+    }
+    
     @IBAction func languagesButtonTapped(_ sender: Any) {
         guard let button = sender as? UIButton else { return }
         
@@ -129,7 +138,7 @@ class TranslatorViewController: UIViewController
         
         imageView.image = image
         
-        translationLabel?.text = ""
+        translatedText = ""
         activityIndicator.startAnimating()
         
         VisionAPI.shared.highlight(imageView: imageView) { [weak self] (images) in
@@ -164,7 +173,7 @@ class TranslatorViewController: UIViewController
                     guard let translateText = translate else { return }
                     
                     DispatchQueue.main.async {
-                        self?.translationLabel.text = translateText
+                        self?.translatedText = translateText
                     }
                 })
             })
