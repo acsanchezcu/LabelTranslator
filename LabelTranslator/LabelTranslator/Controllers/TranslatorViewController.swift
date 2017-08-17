@@ -129,6 +129,7 @@ class TranslatorViewController: UIViewController
         
         imageView.image = image
         
+        translationLabel?.text = ""
         activityIndicator.startAnimating()
         
         VisionAPI.shared.highlight(imageView: imageView) { [weak self] (images) in
